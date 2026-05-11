@@ -89,13 +89,13 @@ export function BoxesSection({ dict, locale }: BoxesSectionProps) {
                 )}
 
                 <div className="p-6 text-center flex flex-col flex-1">
-                  <div className="bg-white rounded-xl p-4 mx-auto mb-3 w-fit">
+                  <div className="relative mx-auto mb-3 w-36 h-32 flex items-center justify-center rounded-xl overflow-hidden" style={{ backgroundColor: '#f5f5f5' }}>
                     <Image
                       src={box.image}
                       alt={tBox.name}
                       width={box.width}
                       height={box.height}
-                      className="w-28 h-auto mix-blend-multiply"
+                      className="w-full h-auto object-contain mix-blend-multiply"
                       loading="lazy"
                     />
                   </div>
