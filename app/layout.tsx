@@ -1,25 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
-
-const plusJakartaSans = localFont({
-  src: [
-    {
-      path: '../public/fonts/plus-jakarta-sans-latin.woff2',
-      weight: '200 800',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/plus-jakarta-sans-latin-ext.woff2',
-      weight: '200 800',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-sans',
-  display: 'swap',
-  preload: true,
-});
 
 export const metadata: Metadata = {
   title: {
@@ -74,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl" className={`${plusJakartaSans.variable} bg-background`} suppressHydrationWarning>
+    <html lang="pl" className="bg-background" suppressHydrationWarning>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
