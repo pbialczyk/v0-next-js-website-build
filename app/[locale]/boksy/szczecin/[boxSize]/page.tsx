@@ -34,7 +34,7 @@ const boxesData = {
     name: "Boks S",
     subtitle: { pl: "mały magazyn 3 m²", en: "small unit 3 m²" },
     size: "3 m²",
-    dimensions: "2 m × 1.5 m × 2 m",
+    dimensions: "1.5 m × 2 m × 2 m",
     volume: "6 m³",
     height: "2 m",
     pallets: 6,
@@ -42,6 +42,7 @@ const boxesData = {
     priceRegular: 250,
     color: "bg-sky-500",
     icon: Package,
+    typeId: "32769a88-77d9-ef11-88f8-000d3a1d3d62",
     h1: {
       pl: "Boks S — mały magazyn 3 m² Szczecin",
       en: "Box S — small 3 m² unit Szczecin",
@@ -86,13 +87,37 @@ const boxesData = {
         { icon: Briefcase, text: "Small businesses — document archive" },
       ],
     },
+    faq: {
+      pl: [
+        { q: "Ile kartonów zmieści się w Boksie S?", a: "W Boksie S (3 m², 6 m³) zmieścisz około 30-40 standardowych kartonów przeprowadzkowych lub wyposażenie jednego pokoju studenckiego." },
+        { q: "Czy Boks S wystarczy na rzeczy z akademika?", a: "Tak! Boks S idealnie mieści zawartość typowego pokoju w akademiku: łóżko, biurko, krzesło, kilka kartonów z rzeczami osobistymi i rower." },
+        { q: "Czy mogę przechowywać rower w Boksie S?", a: "Oczywiście. W Boksie S zmieścisz 2-3 rowery plus dodatkowe rzeczy. To popularne rozwiązanie na sezon zimowy." },
+        { q: "Jaki jest minimalny okres najmu Boksu S?", a: "Minimalny okres najmu to 1 miesiąc. Możesz przedłużyć lub zakończyć najem w dowolnym momencie z 7-dniowym wypowiedzeniem." },
+      ],
+      en: [
+        { q: "How many boxes fit in Box S?", a: "Box S (3 m², 6 m³) fits about 30-40 standard moving boxes or the contents of one student room." },
+        { q: "Is Box S enough for dorm items?", a: "Yes! Box S perfectly fits a typical dorm room: bed, desk, chair, several boxes of personal items, and a bicycle." },
+        { q: "Can I store a bicycle in Box S?", a: "Of course. Box S fits 2-3 bicycles plus additional items. It's a popular solution for winter storage." },
+        { q: "What is the minimum rental period for Box S?", a: "The minimum rental period is 1 month. You can extend or end your rental at any time with 7 days' notice." },
+      ],
+    },
+    segments: {
+      pl: [
+        { slug: "dla-studentow", name: "Dla studentów" },
+        { slug: "archiwum-dokumentow", name: "Archiwum dokumentów" },
+      ],
+      en: [
+        { slug: "dla-studentow", name: "For students" },
+        { slug: "archiwum-dokumentow", name: "Document archive" },
+      ],
+    },
   },
   "boks-m": {
     id: "m",
     name: "Boks M",
     subtitle: { pl: "średni magazyn 6 m²", en: "medium unit 6 m²" },
     size: "6 m²",
-    dimensions: "3 m × 2 m × 2 m",
+    dimensions: "2 m × 3 m × 2 m",
     volume: "12 m³",
     height: "2 m",
     pallets: 12,
@@ -100,6 +125,7 @@ const boxesData = {
     priceRegular: 350,
     color: "bg-primary",
     icon: Box,
+    typeId: "531f0bd3-77d9-ef11-88f8-000d3a1d3d62",
     h1: {
       pl: "Boks M — magazyn 6 m² Szczecin",
       en: "Box M — 6 m² unit Szczecin",
@@ -144,13 +170,37 @@ const boxesData = {
         { icon: Briefcase, text: "Businesses — goods and equipment storage" },
       ],
     },
+    faq: {
+      pl: [
+        { q: "Czy w Boksie M zmieszczą się meble z mieszkania?", a: "Tak! Boks M (6 m², 12 m³) mieści meble z mieszkania do 50 m² — sofę, łóżko, szafę, stół z krzesłami i wiele kartonów." },
+        { q: "Czy mogę przechowywać motor w Boksie M?", a: "Oczywiście. Boks M bez problemu pomieści motor lub skuter plus dodatkowe rzeczy. Pamiętaj o opróżnieniu zbiornika paliwa." },
+        { q: "Ile europalet zmieści się w Boksie M?", a: "Boks M mieści 12 europalet, co sprawia, że jest idealny dla małych firm potrzebujących magazynu na towar." },
+        { q: "Czy Boks M to dobry wybór na czas remontu?", a: "Tak, to nasz najpopularniejszy wybór na czas remontu. Mieści meble z typowego mieszkania i jest w przystępnej cenie." },
+      ],
+      en: [
+        { q: "Will furniture from my apartment fit in Box M?", a: "Yes! Box M (6 m², 12 m³) fits furniture from an apartment up to 50 m² — sofa, bed, wardrobe, table with chairs, and many boxes." },
+        { q: "Can I store a motorcycle in Box M?", a: "Of course. Box M easily fits a motorcycle or scooter plus additional items. Remember to empty the fuel tank." },
+        { q: "How many europallets fit in Box M?", a: "Box M fits 12 europallets, making it ideal for small businesses needing storage for goods." },
+        { q: "Is Box M a good choice during renovation?", a: "Yes, it's our most popular choice during renovation. It fits furniture from a typical apartment at an affordable price." },
+      ],
+    },
+    segments: {
+      pl: [
+        { slug: "remont-przeprowadzka", name: "Remont i przeprowadzka" },
+        { slug: "dla-firm", name: "Dla firm" },
+      ],
+      en: [
+        { slug: "remont-przeprowadzka", name: "Renovation & moving" },
+        { slug: "dla-firm", name: "For business" },
+      ],
+    },
   },
   "boks-l": {
     id: "l",
     name: "Boks L",
     subtitle: { pl: "duży magazyn 12 m²", en: "large unit 12 m²" },
     size: "12 m²",
-    dimensions: "4 m × 3 m × 2 m",
+    dimensions: "2 m × 6 m × 2 m",
     volume: "24 m³",
     height: "2 m",
     pallets: 24,
@@ -158,6 +208,7 @@ const boxesData = {
     priceRegular: 500,
     color: "bg-slate-700",
     icon: Layers,
+    typeId: "93bd21f7-77d9-ef11-88f8-000d3a1d3d62",
     h1: {
       pl: "Boks L — duży magazyn 12 m² Szczecin",
       en: "Box L — large 12 m² unit Szczecin",
@@ -200,6 +251,34 @@ const boxesData = {
         { icon: Briefcase, text: "Businesses — professional B2B storage" },
         { icon: Truck, text: "Moving — furniture from entire house" },
         { icon: Home, text: "Property owners — staging" },
+      ],
+    },
+    faq: {
+      pl: [
+        { q: "Czy w Boksie L zmieszczą się meble z domu?", a: "Tak! Boks L (12 m², 24 m³) mieści kompletne wyposażenie domu do 100 m² — wszystkie meble, AGD i kartony z rzeczami." },
+        { q: "Ile europalet zmieści się w Boksie L?", a: "Boks L mieści 24 europalety, co czyni go profesjonalnym rozwiązaniem magazynowym dla firm z dużą ilością towaru." },
+        { q: "Czy mogę przechowywać sprzęt budowlany?", a: "Tak, Boks L idealnie nadaje się do przechowywania maszyn i sprzętu budowlanego. Szeroki wjazd ułatwia załadunek." },
+        { q: "Czy Boks L nadaje się dla firm e-commerce?", a: "Zdecydowanie! 24 europalety to duża przestrzeń na towar. Dostęp 24/7 pozwala realizować zamówienia o każdej porze." },
+        { q: "Czy wystawiacie faktury VAT?", a: "Tak, wystawiamy faktury VAT dla wszystkich klientów firmowych." },
+      ],
+      en: [
+        { q: "Will furniture from my house fit in Box L?", a: "Yes! Box L (12 m², 24 m³) fits complete furnishings from a house up to 100 m² — all furniture, appliances, and boxes." },
+        { q: "How many europallets fit in Box L?", a: "Box L fits 24 europallets, making it a professional storage solution for businesses with large inventory." },
+        { q: "Can I store construction equipment?", a: "Yes, Box L is ideal for storing machines and construction equipment. The wide entrance makes loading easy." },
+        { q: "Is Box L suitable for e-commerce businesses?", a: "Definitely! 24 europallets provide ample space for inventory. 24/7 access allows order fulfillment at any time." },
+        { q: "Do you issue VAT invoices?", a: "Yes, we issue VAT invoices for all business clients." },
+      ],
+    },
+    segments: {
+      pl: [
+        { slug: "dla-firm", name: "Dla firm" },
+        { slug: "dla-sklepow-internetowych", name: "Dla e-commerce" },
+        { slug: "dla-firm-budowlanych", name: "Dla firm budowlanych" },
+      ],
+      en: [
+        { slug: "dla-firm", name: "For business" },
+        { slug: "dla-sklepow-internetowych", name: "For e-commerce" },
+        { slug: "dla-firm-budowlanych", name: "For construction" },
       ],
     },
   },
@@ -322,10 +401,24 @@ export default async function BoxDetailPage({ params }: Props) {
     ],
   }
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: (isPl ? box.faq.pl : box.faq.en).map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  }
+
   return (
     <>
       <JsonLd data={productSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       <main className="min-h-screen bg-background">
         {/* Breadcrumb */}
@@ -443,13 +536,13 @@ export default async function BoxDetailPage({ params }: Props) {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Button asChild size="lg">
-                        <a href="https://sprytki.pl/lockit" target="_blank" rel="noopener noreferrer">
+                        <a href={`https://wynajmij.lockit.pl/rent?step=1&typeId=${box.typeId}`} target="_blank" rel="noopener noreferrer">
                           {isPl ? "Wynajmij teraz" : "Rent Now"}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </a>
                       </Button>
                       <Button asChild variant="outline" size="lg">
-                        <a href="tel:+48123456789">{isPl ? "Zadzwoń" : "Call"}</a>
+                        <a href="tel:+48666030717">{isPl ? "Zadzwoń" : "Call"}</a>
                       </Button>
                     </div>
                   </div>
@@ -493,6 +586,126 @@ export default async function BoxDetailPage({ params }: Props) {
                     </Card>
                   )
                 })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Size Comparison Table */}
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl font-bold mb-6">{isPl ? "Porównaj rozmiary boksów" : "Compare unit sizes"}</h2>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-3 px-4 font-semibold">{isPl ? "Rozmiar" : "Size"}</th>
+                      <th className="text-left py-3 px-4 font-semibold">{isPl ? "Powierzchnia" : "Area"}</th>
+                      <th className="text-left py-3 px-4 font-semibold">{isPl ? "Pojemność" : "Capacity"}</th>
+                      <th className="text-left py-3 px-4 font-semibold">{isPl ? "Cena od" : "Price from"}</th>
+                      <th className="py-3 px-4"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {validBoxSizes.map((size) => {
+                      const b = boxesData[size]
+                      const isCurrentBox = size === boxSize
+                      return (
+                        <tr key={size} className={`border-b ${isCurrentBox ? "bg-primary/5" : ""}`}>
+                          <td className="py-3 px-4 font-medium">
+                            {b.name}
+                            {isCurrentBox && <Badge className="ml-2 text-xs">{isPl ? "Aktualny" : "Current"}</Badge>}
+                          </td>
+                          <td className="py-3 px-4">{b.size}</td>
+                          <td className="py-3 px-4">{b.volume}</td>
+                          <td className="py-3 px-4 font-semibold">{b.priceFrom} zł</td>
+                          <td className="py-3 px-4">
+                            {!isCurrentBox && (
+                              <Link 
+                                href={`${basePath}/boksy/szczecin/${size}/`}
+                                className="text-primary hover:underline text-sm"
+                              >
+                                {isPl ? "Zobacz" : "View"} →
+                              </Link>
+                            )}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Recommended Segments */}
+        <section className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl font-bold mb-6">{isPl ? "Polecane dla Ciebie" : "Recommended for you"}</h2>
+              <div className="flex flex-wrap gap-3">
+                {(isPl ? box.segments.pl : box.segments.en).map((segment) => (
+                  <Link
+                    key={segment.slug}
+                    href={`${basePath}/${segment.slug}/`}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-background border rounded-lg hover:border-primary transition-colors"
+                  >
+                    <ArrowRight className="w-4 h-4 text-primary" />
+                    {segment.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl font-bold mb-6">
+                {isPl ? `Najczęstsze pytania o ${box.name}` : `FAQ about ${box.name}`}
+              </h2>
+              <div className="space-y-4">
+                {(isPl ? box.faq.pl : box.faq.en).map((item, index) => (
+                  <Card key={index}>
+                    <CardContent className="p-5">
+                      <h3 className="font-semibold mb-2">{item.q}</h3>
+                      <p className="text-muted-foreground">{item.a}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-16 bg-gradient-to-r from-brand-deep to-primary">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-3xl font-bold text-white mb-4">
+                {isPl ? `Wynajmij ${box.name} już dziś` : `Rent ${box.name} today`}
+              </h2>
+              <p className="text-white/80 mb-8">
+                {isPl 
+                  ? "Wynajem online w 5 minut. Dostęp 24/7. -50% na pierwszy miesiąc."
+                  : "Online rental in 5 minutes. 24/7 access. -50% first month."}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" variant="secondary">
+                  <a href={`https://wynajmij.lockit.pl/rent?step=1&typeId=${box.typeId}`} target="_blank" rel="noopener noreferrer">
+                    {isPl ? `Wynajmij ${box.name}` : `Rent ${box.name}`}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20">
+                  <a href="tel:+48666030717">
+                    {isPl ? "Zadzwoń: +48 666 030 717" : "Call: +48 666 030 717"}
+                  </a>
+                </Button>
               </div>
             </div>
           </div>
