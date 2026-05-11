@@ -21,18 +21,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const isPl = locale === "pl" || locale === defaultLocale
 
+  const title = isPl ? "Boksy i cennik — LOCKIT Self Storage" : "Storage Units & Pricing — LOCKIT Self Storage";
+  const description = isPl
+    ? "Boksy magazynowe self storage. Wybierz lokalizację i rozmiar boksu. Ceny od 125 zł/mies. Wynajem online w 5 minut."
+    : "Self storage units. Choose location and box size. Prices from 125 PLN/month. Online rental in 5 minutes.";
+  const url = isPl ? "https://lockit.pl/boksy/" : "https://lockit.pl/en/boksy/";
+
   return {
-    title: isPl ? "Boksy i cennik — LOCKIT Self Storage" : "Storage Units & Pricing — LOCKIT Self Storage",
-    description: isPl
-      ? "Boksy magazynowe self storage. Wybierz lokalizację i rozmiar boksu. Ceny od 125 zł/mies. Wynajem online w 5 minut."
-      : "Self storage units. Choose location and box size. Prices from 125 PLN/month. Online rental in 5 minutes.",
-    alternates: {
-      canonical: isPl ? "https://lockit.pl/boksy/" : "https://lockit.pl/en/boksy/",
-      languages: {
-        pl: "https://lockit.pl/boksy/",
-        en: "https://lockit.pl/en/boksy/",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/boksy/", en: "https://lockit.pl/en/boksy/" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isPl ? 'pl_PL' : 'en_US', type: 'website', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT Boksy' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   }
 }
 

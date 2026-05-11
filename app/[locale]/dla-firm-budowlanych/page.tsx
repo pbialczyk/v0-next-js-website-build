@@ -20,20 +20,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Storage for Construction Companies | LOCKIT Szczecin" : "Magazyn dla firm budowlanych | LOCKIT Szczecin";
+  const description = isEn
+    ? "Secure storage for construction equipment, tools and materials in Szczecin. 24/7 access, drive-up for vans, VAT invoice. From 125 PLN/month."
+    : "Bezpieczny magazyn na sprzęt budowlany, narzędzia i materiały w Szczecinie. Dostęp 24/7, wjazd dla busów, faktura VAT. Od 125 zł/mies.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-firm-budowlanych`;
+
   return {
-    title: isEn
-      ? "Storage for Construction Companies | LOCKIT Szczecin"
-      : "Magazyn dla firm budowlanych | LOCKIT Szczecin",
-    description: isEn
-      ? "Secure storage for construction equipment, tools and materials in Szczecin. 24/7 access, drive-up for vans, VAT invoice. From 125 PLN/month."
-      : "Bezpieczny magazyn na sprzęt budowlany, narzędzia i materiały w Szczecinie. Dostęp 24/7, wjazd dla busów, faktura VAT. Od 125 zł/mies.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-firm-budowlanych`,
-      languages: {
-        pl: "https://lockit.pl/dla-firm-budowlanych",
-        en: "https://lockit.pl/en/dla-firm-budowlanych",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/dla-firm-budowlanych", en: "https://lockit.pl/en/dla-firm-budowlanych" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'website', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT dla firm budowlanych' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 

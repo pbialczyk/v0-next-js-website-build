@@ -20,20 +20,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "E-commerce Storage | LOCKIT Szczecin" : "Magazyn dla sklepów internetowych | LOCKIT Szczecin";
+  const description = isEn
+    ? "Warehouse space for e-commerce businesses in Szczecin. Store your inventory with 24/7 access. Scale up during peak seasons. From 125 PLN/month."
+    : "Przestrzeń magazynowa dla e-commerce w Szczecinie. Przechowuj zapasy z dostępem 24/7. Skaluj w sezonach szczytowych. Od 125 zł/mies.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-sklepow-internetowych`;
+
   return {
-    title: isEn
-      ? "E-commerce Storage | LOCKIT Szczecin"
-      : "Magazyn dla sklepów internetowych | LOCKIT Szczecin",
-    description: isEn
-      ? "Warehouse space for e-commerce businesses in Szczecin. Store your inventory with 24/7 access. Scale up during peak seasons. From 125 PLN/month."
-      : "Przestrzeń magazynowa dla e-commerce w Szczecinie. Przechowuj zapasy z dostępem 24/7. Skaluj w sezonach szczytowych. Od 125 zł/mies.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-sklepow-internetowych`,
-      languages: {
-        pl: "https://lockit.pl/dla-sklepow-internetowych",
-        en: "https://lockit.pl/en/dla-sklepow-internetowych",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/dla-sklepow-internetowych", en: "https://lockit.pl/en/dla-sklepow-internetowych" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'website', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT dla e-commerce' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 

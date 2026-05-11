@@ -20,20 +20,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Storage During Renovation & Moving | LOCKIT Szczecin" : "Magazyn na czas remontu i przeprowadzki | LOCKIT Szczecin";
+  const description = isEn
+    ? "Safe storage for your furniture and belongings during renovation or moving in Szczecin. Flexible rental, 24/7 access. From 125 PLN/month."
+    : "Bezpieczne miejsce na meble i rzeczy podczas remontu lub przeprowadzki w Szczecinie. Elastyczny najem, dostęp 24/7. Od 125 zł/mies.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}remont-przeprowadzka`;
+
   return {
-    title: isEn
-      ? "Storage During Renovation & Moving | LOCKIT Szczecin"
-      : "Magazyn na czas remontu i przeprowadzki | LOCKIT Szczecin",
-    description: isEn
-      ? "Safe storage for your furniture and belongings during renovation or moving in Szczecin. Flexible rental, 24/7 access. From 125 PLN/month."
-      : "Bezpieczne miejsce na meble i rzeczy podczas remontu lub przeprowadzki w Szczecinie. Elastyczny najem, dostęp 24/7. Od 125 zł/mies.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}remont-przeprowadzka`,
-      languages: {
-        pl: "https://lockit.pl/remont-przeprowadzka",
-        en: "https://lockit.pl/en/remont-przeprowadzka",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/remont-przeprowadzka", en: "https://lockit.pl/en/remont-przeprowadzka" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'website', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT remont przeprowadzka' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 

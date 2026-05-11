@@ -20,20 +20,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Self Storage for Business — Complete Guide | LOCKIT" : "Self storage dla firm — kompleksowy przewodnik | LOCKIT";
+  const description = isEn
+    ? "How to use self storage in your business. Inventory storage, document archiving, flexible solutions for SMBs. Learn how companies benefit from storage units."
+    : "Jak wykorzystać self storage w firmie. Magazynowanie towarów, archiwizacja dokumentów, elastyczne rozwiązania dla MŚP. Sprawdź korzyści dla firm.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik/self-storage-dla-firm`;
+
   return {
-    title: isEn
-      ? "Self Storage for Business — Complete Guide | LOCKIT"
-      : "Self storage dla firm — kompleksowy przewodnik | LOCKIT",
-    description: isEn
-      ? "How to use self storage in your business. Inventory storage, document archiving, flexible solutions for SMBs. Learn how companies benefit from storage units."
-      : "Jak wykorzystać self storage w firmie. Magazynowanie towarów, archiwizacja dokumentów, elastyczne rozwiązania dla MŚP. Sprawdź korzyści dla firm.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik/self-storage-dla-firm`,
-      languages: {
-        pl: "https://lockit.pl/poradnik/self-storage-dla-firm",
-        en: "https://lockit.pl/en/poradnik/self-storage-dla-firm",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/poradnik/self-storage-dla-firm", en: "https://lockit.pl/en/poradnik/self-storage-dla-firm" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'article', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'Self storage dla firm' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 
@@ -81,20 +78,32 @@ export default async function ArticlePage({
   const benefits = isEn ? benefitsEn : benefitsPl;
   const useCases = isEn ? useCasesEn : useCasesPl;
 
-  const jsonLd = {
+  const basePath = locale === "pl" ? "" : "/en";
+  const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: isEn
-      ? "Self Storage for Business — Complete Guide"
-      : "Self storage dla firm — kompleksowy przewodnik",
+    headline: isEn ? "Self Storage for Business — Complete Guide" : "Self storage dla firm — kompleksowy przewodnik",
     author: { "@type": "Organization", name: "LOCKIT Self Storage" },
-    publisher: { "@type": "Organization", name: "LOCKIT Self Storage" },
+    publisher: { "@type": "Organization", name: "LOCKIT Self Storage", logo: { "@type": "ImageObject", url: "https://lockit.pl/logo.png" } },
     datePublished: "2026-04-01",
+    dateModified: "2026-05-01",
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://lockit.pl${basePath}/poradnik/self-storage-dla-firm` },
+    image: "https://lockit.pl/og-image.jpg",
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: isEn ? "Home" : "Strona główna", item: `https://lockit.pl${basePath}` },
+      { "@type": "ListItem", position: 2, name: isEn ? "Guide" : "Poradnik", item: `https://lockit.pl${basePath}/poradnik` },
+      { "@type": "ListItem", position: 3, name: isEn ? "Self Storage for Business" : "Self storage dla firm" },
+    ],
   };
 
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Navbar dict={dict} locale={locale} />
       <main className="min-h-screen bg-background">
         <article className="py-12 md:py-20">

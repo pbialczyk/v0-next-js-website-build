@@ -246,7 +246,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: isPl
         ? `https://lockit.pl/boksy/szczecin/${boxSize}/`
         : `https://lockit.pl/en/boksy/szczecin/${boxSize}/`,
+      siteName: 'LOCKIT Self Storage',
+      locale: isPl ? 'pl_PL' : 'en_US',
       type: "website",
+      images: [{
+        url: 'https://lockit.pl/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: `${box.name} LOCKIT Szczecin`,
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${box.name} — ${box.size} | LOCKIT Szczecin`,
+      description: isPl ? box.description.pl : box.description.en,
+      images: ['https://lockit.pl/og-image.jpg'],
     },
   }
 }
@@ -264,37 +278,22 @@ export default async function BoxDetailPage({ params }: Props) {
   const basePath = locale === defaultLocale ? "" : `/${locale}`
   const IconComponent = box.icon
 
-  const serviceSchema = {
+  const productSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "Product",
     name: `${box.name} — ${box.size}`,
     description: isPl ? box.description.pl : box.description.en,
-    provider: {
-      "@type": "LocalBusiness",
+    brand: {
+      "@type": "Brand",
       name: "LOCKIT Self Storage",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "ul. Gdańska 14C",
-        addressLocality: "Szczecin",
-        postalCode: "70-661",
-        addressCountry: "PL",
-      },
-    },
-    areaServed: {
-      "@type": "City",
-      name: "Szczecin",
     },
     offers: {
       "@type": "Offer",
       price: box.priceFrom,
       priceCurrency: "PLN",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: box.priceFrom,
-        priceCurrency: "PLN",
-        unitText: isPl ? "miesiąc" : "month",
-      },
+      priceValidUntil: "2026-12-31",
       availability: "https://schema.org/InStock",
+      url: `https://lockit.pl${basePath}/boksy/szczecin/${boxSize}/`,
     },
   }
 
@@ -325,7 +324,7 @@ export default async function BoxDetailPage({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={serviceSchema} />
+      <JsonLd data={productSchema} />
       <JsonLd data={breadcrumbSchema} />
 
       <main className="min-h-screen bg-background">

@@ -53,7 +53,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? "Boksy magazynowe w Szczecinie. Dostęp 24/7, monitoring, ubezpieczenie w cenie."
         : "Storage units in Szczecin. 24/7 access, monitoring, insurance included.",
       url: isPl ? "https://lockit.pl/self-storage-szczecin/" : "https://lockit.pl/en/self-storage-szczecin/",
+      siteName: 'LOCKIT Self Storage',
+      locale: isPl ? 'pl_PL' : 'en_US',
       type: "website",
+      images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT Self Storage Szczecin' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: isPl ? "Self Storage Szczecin | LOCKIT" : "Self Storage Szczecin | LOCKIT",
+      description: isPl
+        ? "Boksy magazynowe w Szczecinie. Dostęp 24/7, monitoring, ubezpieczenie w cenie."
+        : "Storage units in Szczecin. 24/7 access, monitoring, insurance included.",
+      images: ['https://lockit.pl/og-image.jpg'],
     },
   }
 }

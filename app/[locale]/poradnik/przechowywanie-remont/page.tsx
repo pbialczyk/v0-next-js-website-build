@@ -20,20 +20,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Storage During Renovation — Tips & Guide | LOCKIT" : "Przechowywanie rzeczy podczas remontu — porady | LOCKIT";
+  const description = isEn
+    ? "How to protect your furniture and belongings during home renovation. Practical tips for packing, moving and storing items safely."
+    : "Jak zabezpieczyć meble i rzeczy podczas remontu mieszkania. Praktyczne porady pakowania, przenoszenia i bezpiecznego przechowywania.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik/przechowywanie-remont`;
+
   return {
-    title: isEn
-      ? "Storage During Renovation — Tips & Guide | LOCKIT"
-      : "Przechowywanie rzeczy podczas remontu — porady | LOCKIT",
-    description: isEn
-      ? "How to protect your furniture and belongings during home renovation. Practical tips for packing, moving and storing items safely."
-      : "Jak zabezpieczyć meble i rzeczy podczas remontu mieszkania. Praktyczne porady pakowania, przenoszenia i bezpiecznego przechowywania.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik/przechowywanie-remont`,
-      languages: {
-        pl: "https://lockit.pl/poradnik/przechowywanie-remont",
-        en: "https://lockit.pl/en/poradnik/przechowywanie-remont",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/poradnik/przechowywanie-remont", en: "https://lockit.pl/en/poradnik/przechowywanie-remont" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'article', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'Przechowywanie podczas remontu' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 
@@ -79,20 +76,32 @@ export default async function ArticlePage({
   const tips = isEn ? tipsEn : tipsPl;
   const warnings = isEn ? warningsEn : warningsPl;
 
-  const jsonLd = {
+  const basePath = locale === "pl" ? "" : "/en";
+  const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: isEn
-      ? "Storage During Renovation — Tips & Guide"
-      : "Przechowywanie rzeczy podczas remontu",
+    headline: isEn ? "Storage During Renovation — Tips & Guide" : "Przechowywanie rzeczy podczas remontu",
     author: { "@type": "Organization", name: "LOCKIT Self Storage" },
-    publisher: { "@type": "Organization", name: "LOCKIT Self Storage" },
+    publisher: { "@type": "Organization", name: "LOCKIT Self Storage", logo: { "@type": "ImageObject", url: "https://lockit.pl/logo.png" } },
     datePublished: "2026-04-01",
+    dateModified: "2026-05-01",
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://lockit.pl${basePath}/poradnik/przechowywanie-remont` },
+    image: "https://lockit.pl/og-image.jpg",
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: isEn ? "Home" : "Strona główna", item: `https://lockit.pl${basePath}` },
+      { "@type": "ListItem", position: 2, name: isEn ? "Guide" : "Poradnik", item: `https://lockit.pl${basePath}/poradnik` },
+      { "@type": "ListItem", position: 3, name: isEn ? "Storage During Renovation" : "Przechowywanie podczas remontu" },
+    ],
   };
 
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Navbar dict={dict} locale={locale} />
       <main className="min-h-screen bg-background">
         <article className="py-12 md:py-20">

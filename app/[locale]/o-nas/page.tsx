@@ -20,15 +20,21 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "About Us | LOCKIT Self Storage Szczecin" : "O nas | LOCKIT Self Storage Szczecin";
+  const description = isEn
+    ? "Learn about LOCKIT Self Storage — Szczecin's modern storage facility. Our mission, values, and commitment to providing safe, accessible storage solutions."
+    : "Poznaj LOCKIT Self Storage — nowoczesny magazyn w Szczecinie. Nasza misja, wartości i zaangażowanie w dostarczanie bezpiecznych rozwiązań magazynowych.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}o-nas`;
+
   return {
-    title: isEn ? "About Us | LOCKIT Self Storage Szczecin" : "O nas | LOCKIT Self Storage Szczecin",
-    description: isEn
-      ? "Learn about LOCKIT Self Storage — Szczecin's modern storage facility. Our mission, values, and commitment to providing safe, accessible storage solutions."
-      : "Poznaj LOCKIT Self Storage — nowoczesny magazyn w Szczecinie. Nasza misja, wartości i zaangażowanie w dostarczanie bezpiecznych rozwiązań magazynowych.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}o-nas`,
-      languages: { pl: "https://lockit.pl/o-nas", en: "https://lockit.pl/en/o-nas" },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/o-nas", en: "https://lockit.pl/en/o-nas" } },
+    openGraph: {
+      title, description, url,
+      siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'website',
+      images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT Self Storage' }],
     },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 

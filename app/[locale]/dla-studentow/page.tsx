@@ -20,20 +20,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Student Storage | LOCKIT Szczecin" : "Magazyn dla studentów | LOCKIT Szczecin";
+  const description = isEn
+    ? "Affordable storage for students in Szczecin. Store your belongings during summer break or semester abroad. From 125 PLN/month, 24/7 access."
+    : "Tani magazyn dla studentów w Szczecinie. Przechowaj rzeczy na wakacje lub semestr za granicą. Od 125 zł/mies., dostęp 24/7.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-studentow`;
+
   return {
-    title: isEn
-      ? "Student Storage | LOCKIT Szczecin"
-      : "Magazyn dla studentów | LOCKIT Szczecin",
-    description: isEn
-      ? "Affordable storage for students in Szczecin. Store your belongings during summer break or semester abroad. From 125 PLN/month, 24/7 access."
-      : "Tani magazyn dla studentów w Szczecinie. Przechowaj rzeczy na wakacje lub semestr za granicą. Od 125 zł/mies., dostęp 24/7.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-studentow`,
-      languages: {
-        pl: "https://lockit.pl/dla-studentow",
-        en: "https://lockit.pl/en/dla-studentow",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/dla-studentow", en: "https://lockit.pl/en/dla-studentow" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'website', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT dla studentów' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 

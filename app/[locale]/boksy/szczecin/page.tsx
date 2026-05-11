@@ -40,7 +40,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? "Boksy self storage w Szczecinie od 125 zł/mies. Dostęp 24/7, monitoring, ubezpieczenie w cenie."
         : "Self storage units in Szczecin from 125 PLN/month. 24/7 access, monitoring, insurance included.",
       url: isPl ? "https://lockit.pl/boksy/szczecin/" : "https://lockit.pl/en/boksy/szczecin/",
+      siteName: 'LOCKIT Self Storage',
+      locale: isPl ? 'pl_PL' : 'en_US',
       type: "website",
+      images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT Boksy Szczecin' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: isPl ? "Boksy magazynowe Szczecin — cennik | LOCKIT" : "Storage units Szczecin — pricing | LOCKIT",
+      description: isPl
+        ? "Boksy self storage w Szczecinie od 125 zł/mies. Dostęp 24/7, monitoring, ubezpieczenie w cenie."
+        : "Self storage units in Szczecin from 125 PLN/month. 24/7 access, monitoring, insurance included.",
+      images: ['https://lockit.pl/og-image.jpg'],
     },
   }
 }

@@ -20,20 +20,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Business Document Archiving — Requirements & Solutions | LOCKIT" : "Archiwizacja dokumentów firmowych — obowiązki i rozwiązania | LOCKIT";
+  const description = isEn
+    ? "How long do you need to keep business documents? Legal requirements for document retention in Poland and storage solutions for your archives."
+    : "Ile lat trzeba przechowywać dokumenty firmowe? Wymagania prawne w Polsce i rozwiązania magazynowe dla Twoich archiwów.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik/archiwizacja-dokumentow`;
+
   return {
-    title: isEn
-      ? "Business Document Archiving — Requirements & Solutions | LOCKIT"
-      : "Archiwizacja dokumentów firmowych — obowiązki i rozwiązania | LOCKIT",
-    description: isEn
-      ? "How long do you need to keep business documents? Legal requirements for document retention in Poland and storage solutions for your archives."
-      : "Ile lat trzeba przechowywać dokumenty firmowe? Wymagania prawne w Polsce i rozwiązania magazynowe dla Twoich archiwów.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik/archiwizacja-dokumentow`,
-      languages: {
-        pl: "https://lockit.pl/poradnik/archiwizacja-dokumentow",
-        en: "https://lockit.pl/en/poradnik/archiwizacja-dokumentow",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/poradnik/archiwizacja-dokumentow", en: "https://lockit.pl/en/poradnik/archiwizacja-dokumentow" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'article', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'Archiwizacja dokumentów' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 
@@ -66,20 +63,32 @@ export default async function ArticlePage({
 
   const retention = isEn ? retentionEn : retentionPl;
 
-  const jsonLd = {
+  const basePath = locale === "pl" ? "" : "/en";
+  const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: isEn
-      ? "Business Document Archiving — Requirements & Solutions"
-      : "Archiwizacja dokumentów firmowych — obowiązki i rozwiązania",
+    headline: isEn ? "Business Document Archiving — Requirements & Solutions" : "Archiwizacja dokumentów firmowych — obowiązki i rozwiązania",
     author: { "@type": "Organization", name: "LOCKIT Self Storage" },
-    publisher: { "@type": "Organization", name: "LOCKIT Self Storage" },
+    publisher: { "@type": "Organization", name: "LOCKIT Self Storage", logo: { "@type": "ImageObject", url: "https://lockit.pl/logo.png" } },
     datePublished: "2026-04-01",
+    dateModified: "2026-05-01",
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://lockit.pl${basePath}/poradnik/archiwizacja-dokumentow` },
+    image: "https://lockit.pl/og-image.jpg",
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: isEn ? "Home" : "Strona główna", item: `https://lockit.pl${basePath}` },
+      { "@type": "ListItem", position: 2, name: isEn ? "Guide" : "Poradnik", item: `https://lockit.pl${basePath}/poradnik` },
+      { "@type": "ListItem", position: 3, name: isEn ? "Document Archiving" : "Archiwizacja dokumentów" },
+    ],
   };
 
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Navbar dict={dict} locale={locale} />
       <main className="min-h-screen bg-background">
         <article className="py-12 md:py-20">

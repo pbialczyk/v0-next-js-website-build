@@ -20,19 +20,30 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Business Storage Solutions | LOCKIT Szczecin B2B" : "Magazyn dla firm | LOCKIT Szczecin B2B";
+  const description = isEn
+    ? "Flexible storage solutions for businesses in Szczecin. Store inventory, documents, equipment. 24/7 access, invoice, no long-term contracts."
+    : "Elastyczny magazyn dla firm w Szczecinie. Przechowuj towary, dokumenty, sprzęt. Dostęp 24/7, faktura VAT, bez długoterminowych umów.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-firm`;
+
   return {
-    title: isEn
-      ? "Business Storage Solutions | LOCKIT Szczecin B2B"
-      : "Magazyn dla firm | LOCKIT Szczecin B2B",
-    description: isEn
-      ? "Flexible storage solutions for businesses in Szczecin. Store inventory, documents, equipment. 24/7 access, invoice, no long-term contracts."
-      : "Elastyczny magazyn dla firm w Szczecinie. Przechowuj towary, dokumenty, sprzęt. Dostęp 24/7, faktura VAT, bez długoterminowych umów.",
+    title,
+    description,
     alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-firm`,
-      languages: {
-        pl: "https://lockit.pl/dla-firm",
-        en: "https://lockit.pl/en/dla-firm",
-      },
+      canonical: url,
+      languages: { pl: "https://lockit.pl/dla-firm", en: "https://lockit.pl/en/dla-firm" },
+    },
+    openGraph: {
+      title, description, url,
+      siteName: 'LOCKIT Self Storage',
+      locale: isEn ? 'en_US' : 'pl_PL',
+      type: 'website',
+      images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT Self Storage dla firm' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title, description,
+      images: ['https://lockit.pl/og-image.jpg'],
     },
   };
 }

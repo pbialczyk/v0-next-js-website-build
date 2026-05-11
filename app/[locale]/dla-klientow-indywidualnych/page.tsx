@@ -20,20 +20,24 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Self Storage for Individuals | LOCKIT Szczecin" : "Self Storage dla osób prywatnych | LOCKIT Szczecin";
+  const description = isEn
+    ? "Personal storage units in Szczecin. Safe place for your belongings during renovation, moving or just for decluttering. 24/7 access, from 125 PLN/month."
+    : "Boks magazynowy dla osób prywatnych w Szczecinie. Bezpieczne miejsce na Twoje rzeczy podczas remontu, przeprowadzki lub gdy potrzebujesz więcej przestrzeni. Dostęp 24/7, od 125 zł/mies.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-klientow-indywidualnych`;
+
   return {
-    title: isEn
-      ? "Self Storage for Individuals | LOCKIT Szczecin"
-      : "Self Storage dla osób prywatnych | LOCKIT Szczecin",
-    description: isEn
-      ? "Personal storage units in Szczecin. Safe place for your belongings during renovation, moving or just for decluttering. 24/7 access, from 125 PLN/month."
-      : "Boks magazynowy dla osób prywatnych w Szczecinie. Bezpieczne miejsce na Twoje rzeczy podczas remontu, przeprowadzki lub gdy potrzebujesz więcej przestrzeni. Dostęp 24/7, od 125 zł/mies.",
+    title, description,
     alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}dla-klientow-indywidualnych`,
-      languages: {
-        pl: "https://lockit.pl/dla-klientow-indywidualnych",
-        en: "https://lockit.pl/en/dla-klientow-indywidualnych",
-      },
+      canonical: url,
+      languages: { pl: "https://lockit.pl/dla-klientow-indywidualnych", en: "https://lockit.pl/en/dla-klientow-indywidualnych" },
     },
+    openGraph: {
+      title, description, url,
+      siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'website',
+      images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT Self Storage' }],
+    },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 

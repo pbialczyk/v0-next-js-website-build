@@ -20,20 +20,17 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "How to Choose Storage Unit Size | LOCKIT Guide" : "Jak wybrać rozmiar boksu magazynowego | Poradnik LOCKIT";
+  const description = isEn
+    ? "Complete guide to choosing the right storage unit size. Learn what fits in 3m², 6m², and 12m² units. Make the right choice for your needs."
+    : "Kompletny przewodnik po wyborze rozmiaru boksu. Dowiedz się, co zmieści się w boksie 3m², 6m² i 12m². Wybierz odpowiedni rozmiar.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik/jak-wybrac-rozmiar-boksu`;
+
   return {
-    title: isEn
-      ? "How to Choose Storage Unit Size | LOCKIT Guide"
-      : "Jak wybrać rozmiar boksu magazynowego | Poradnik LOCKIT",
-    description: isEn
-      ? "Complete guide to choosing the right storage unit size. Learn what fits in 3m², 6m², and 12m² units. Make the right choice for your needs."
-      : "Kompletny przewodnik po wyborze rozmiaru boksu. Dowiedz się, co zmieści się w boksie 3m², 6m² i 12m². Wybierz odpowiedni rozmiar.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik/jak-wybrac-rozmiar-boksu`,
-      languages: {
-        pl: "https://lockit.pl/poradnik/jak-wybrac-rozmiar-boksu",
-        en: "https://lockit.pl/en/poradnik/jak-wybrac-rozmiar-boksu",
-      },
-    },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/poradnik/jak-wybrac-rozmiar-boksu", en: "https://lockit.pl/en/poradnik/jak-wybrac-rozmiar-boksu" } },
+    openGraph: { title, description, url, siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'article', images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'Jak wybrać rozmiar boksu' }] },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 
@@ -46,27 +43,32 @@ export default async function ArticlePage({
   const dict = await getDictionary(locale);
   const isEn = locale === "en";
 
-  const jsonLd = {
+  const basePath = locale === "pl" ? "" : "/en";
+  const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: isEn
-      ? "How to Choose the Right Storage Unit Size"
-      : "Jak wybrać rozmiar boksu magazynowego",
-    author: {
-      "@type": "Organization",
-      name: "LOCKIT Self Storage",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "LOCKIT Self Storage",
-    },
+    headline: isEn ? "How to Choose the Right Storage Unit Size" : "Jak wybrać rozmiar boksu magazynowego",
+    author: { "@type": "Organization", name: "LOCKIT Self Storage" },
+    publisher: { "@type": "Organization", name: "LOCKIT Self Storage", logo: { "@type": "ImageObject", url: "https://lockit.pl/logo.png" } },
     datePublished: "2026-04-01",
-    dateModified: "2026-04-01",
+    dateModified: "2026-05-01",
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://lockit.pl${basePath}/poradnik/jak-wybrac-rozmiar-boksu` },
+    image: "https://lockit.pl/og-image.jpg",
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: isEn ? "Home" : "Strona główna", item: `https://lockit.pl${basePath}` },
+      { "@type": "ListItem", position: 2, name: isEn ? "Guide" : "Poradnik", item: `https://lockit.pl${basePath}/poradnik` },
+      { "@type": "ListItem", position: 3, name: isEn ? "How to Choose Unit Size" : "Jak wybrać rozmiar boksu" },
+    ],
   };
 
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Navbar dict={dict} locale={locale} />
       <main className="min-h-screen bg-background">
         <article className="py-12 md:py-20">

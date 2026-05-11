@@ -95,6 +95,11 @@ export default async function HomePage({ params }: PageProps) {
       ratingValue: '5.0',
       reviewCount: '40',
     },
+    sameAs: [
+      'https://www.facebook.com/lockitstorage',
+      'https://www.instagram.com/lockitstorage',
+      'https://www.linkedin.com/company/lockit-self-storage',
+    ],
   };
 
   const faqSchema = {

@@ -20,14 +20,38 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Contact | LOCKIT Self Storage Szczecin" : "Kontakt | LOCKIT Self Storage Szczecin";
+  const description = isEn
+    ? "Contact LOCKIT Self Storage in Szczecin. Visit us at ul. Gdańska 14C, call +48 666 030 717, or email info@lockit.pl"
+    : "Skontaktuj się z LOCKIT Self Storage w Szczecinie. Odwiedź nas przy ul. Gdańskiej 14C, zadzwoń +48 666 030 717 lub napisz info@lockit.pl";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}kontakt`;
+
   return {
-    title: isEn ? "Contact | LOCKIT Self Storage Szczecin" : "Kontakt | LOCKIT Self Storage Szczecin",
-    description: isEn
-      ? "Contact LOCKIT Self Storage in Szczecin. Visit us at ul. Gdańska 14C, call +48 123 456 789, or email kontakt@lockit.pl"
-      : "Skontaktuj się z LOCKIT Self Storage w Szczecinie. Odwiedź nas przy ul. Gdańskiej 14C, zadzwoń +48 123 456 789 lub napisz kontakt@lockit.pl",
+    title,
+    description,
     alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}kontakt`,
+      canonical: url,
       languages: { pl: "https://lockit.pl/kontakt", en: "https://lockit.pl/en/kontakt" },
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'LOCKIT Self Storage',
+      locale: isEn ? 'en_US' : 'pl_PL',
+      type: 'website',
+      images: [{
+        url: 'https://lockit.pl/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'LOCKIT Self Storage Szczecin',
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://lockit.pl/og-image.jpg'],
     },
   };
 }
@@ -43,25 +67,27 @@ export default async function ContactPage({
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ContactPage",
-    mainEntity: {
-      "@type": "LocalBusiness",
-      name: "LOCKIT Self Storage",
-      telephone: "+48 123 456 789",
-      email: "kontakt@lockit.pl",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "ul. Gdańska 14C",
-        addressLocality: "Szczecin",
-        postalCode: "70-661",
-        addressCountry: "PL",
-      },
-      openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        opens: "00:00",
-        closes: "23:59",
-      },
+    "@type": "LocalBusiness",
+    name: "LOCKIT Self Storage",
+    telephone: "+48 666 030 717",
+    email: "info@lockit.pl",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "ul. Gdańska 14C",
+      addressLocality: "Szczecin",
+      postalCode: "70-661",
+      addressCountry: "PL",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 53.4366128,
+      longitude: 14.5541361,
+    },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "00:00",
+      closes: "23:59",
     },
   };
 

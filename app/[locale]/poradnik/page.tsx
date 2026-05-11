@@ -19,20 +19,21 @@ export async function generateMetadata({
   const { locale } = await params;
   const isEn = locale === "en";
 
+  const title = isEn ? "Self Storage Guide | LOCKIT Blog" : "Poradnik self storage | Blog LOCKIT";
+  const description = isEn
+    ? "Learn everything about self storage — how to choose the right size, packing tips, storage for businesses, and more. Expert advice from LOCKIT Szczecin."
+    : "Dowiedz się wszystkiego o self storage — jak wybrać rozmiar boksu, porady pakowania, magazyn dla firm i więcej. Porady ekspertów z LOCKIT Szczecin.";
+  const url = `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik`;
+
   return {
-    title: isEn
-      ? "Self Storage Guide | LOCKIT Blog"
-      : "Poradnik self storage | Blog LOCKIT",
-    description: isEn
-      ? "Learn everything about self storage — how to choose the right size, packing tips, storage for businesses, and more. Expert advice from LOCKIT Szczecin."
-      : "Dowiedz się wszystkiego o self storage — jak wybrać rozmiar boksu, porady pakowania, magazyn dla firm i więcej. Porady ekspertów z LOCKIT Szczecin.",
-    alternates: {
-      canonical: `https://lockit.pl/${locale === "pl" ? "" : "en/"}poradnik`,
-      languages: {
-        pl: "https://lockit.pl/poradnik",
-        en: "https://lockit.pl/en/poradnik",
-      },
+    title, description,
+    alternates: { canonical: url, languages: { pl: "https://lockit.pl/poradnik", en: "https://lockit.pl/en/poradnik" } },
+    openGraph: {
+      title, description, url,
+      siteName: 'LOCKIT Self Storage', locale: isEn ? 'en_US' : 'pl_PL', type: 'website',
+      images: [{ url: 'https://lockit.pl/og-image.jpg', width: 1200, height: 630, alt: 'LOCKIT Poradnik' }],
     },
+    twitter: { card: 'summary_large_image', title, description, images: ['https://lockit.pl/og-image.jpg'] },
   };
 }
 
