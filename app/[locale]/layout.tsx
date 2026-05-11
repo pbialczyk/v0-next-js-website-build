@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import { locales, type Locale, isValidLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/getDictionary';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
