@@ -22,7 +22,7 @@ import {
   GraduationCap,
   Truck,
 } from "lucide-react"
-import JsonLd from "@/components/seo/JsonLd"
+import { JsonLd } from "@/components/seo/JsonLd"
 
 type Props = {
   params: Promise<{ locale: string; boxSize: string }>

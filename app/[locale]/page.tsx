@@ -8,7 +8,7 @@ import SegmentsSection from '@/components/sections/SegmentsSection';
 import ReviewsSection from '@/components/sections/ReviewsSection';
 import FAQSection from '@/components/sections/FAQSection';
 import ContactSection from '@/components/sections/ContactSection';
-import JsonLd from '@/components/seo/JsonLd';
+import { JsonLd } from '@/components/seo/JsonLd';
 
 interface PageProps {
   params: Promise<{ locale: string }>;

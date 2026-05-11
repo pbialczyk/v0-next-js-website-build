@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, ArrowRight, Clock, Shield, Check, Phone } from "lucide-react"
-import JsonLd from "@/components/seo/JsonLd"
+import { JsonLd } from "@/components/seo/JsonLd"
 
 type Props = {
   params: Promise<{ locale: string }>
