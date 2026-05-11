@@ -89,14 +89,16 @@ export function BoxesSection({ dict, locale }: BoxesSectionProps) {
                 )}
 
                 <div className="p-6 text-center flex flex-col flex-1">
-                  <Image
-                    src={box.image}
-                    alt={tBox.name}
-                    width={box.width}
-                    height={box.height}
-                    className="w-32 h-auto mx-auto mb-3"
-                    loading="lazy"
-                  />
+                  <div className="bg-white rounded-xl p-4 mx-auto mb-3 w-fit">
+                    <Image
+                      src={box.image}
+                      alt={tBox.name}
+                      width={box.width}
+                      height={box.height}
+                      className="w-28 h-auto mix-blend-multiply"
+                      loading="lazy"
+                    />
+                  </div>
 
                   <div className="text-3xl font-extrabold text-primary-foreground mb-2">
                     {box.label}
