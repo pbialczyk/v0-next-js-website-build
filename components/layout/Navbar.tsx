@@ -13,7 +13,7 @@ interface NavbarProps {
   locale: Locale;
 }
 
-export default function Navbar({ dict, locale }: NavbarProps) {
+export function Navbar({ dict, locale }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
   const pathname = usePathname();

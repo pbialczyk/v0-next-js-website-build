@@ -9,7 +9,7 @@ interface FooterProps {
   locale: Locale;
 }
 
-export default function Footer({ dict, locale }: FooterProps) {
+export function Footer({ dict, locale }: FooterProps) {
   const t = dict;
   const prefix = locale === 'en' ? '/en' : '';
   const localePath = (path: string) => `${prefix}${path}`;
