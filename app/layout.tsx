@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl" className={`${plusJakarta.variable} bg-background`} data-scroll-behavior="smooth">
+    <html lang="pl" className={`${plusJakarta.variable} bg-background`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
