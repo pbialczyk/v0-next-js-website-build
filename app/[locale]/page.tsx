@@ -116,7 +116,7 @@ export default async function HomePage({ params }: PageProps) {
       <JsonLd data={faqSchema} />
       <HeroSection dict={dict} />
       <FeaturesSection dict={dict} />
-      <BoxesSection dict={dict} />
+      <BoxesSection dict={dict} locale={validLocale as Locale} />
       <SegmentsSection dict={dict} locale={validLocale as Locale} />
       <ReviewsSection dict={dict} />
       <FAQSection dict={dict} locale={validLocale as Locale} />

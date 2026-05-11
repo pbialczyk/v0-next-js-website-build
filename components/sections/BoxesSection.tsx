@@ -1,73 +1,144 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import type { Dictionary } from '@/lib/i18n/getDictionary';
+import type { Locale } from '@/lib/i18n/config';
 
 interface BoxesSectionProps {
   dict: Dictionary;
+  locale: Locale;
 }
 
-const boxData = [
-  { size: 'S', area: '3 m²', price: '125', volume: '6 m³' },
-  { size: 'M', area: '6 m²', price: '175', volume: '12 m³', featured: true },
-  { size: 'L', area: '12 m²', price: '250', volume: '24 m³' },
+const boxesMeta = [
+  {
+    id: 's',
+    label: 'S',
+    image: '/boxes/boks-s-256.webp',
+    width: 256,
+    height: 236,
+    price: 'od 125',
+    priceEn: 'from 125',
+    priceRegular: '250',
+    detailLink: '/boksy/szczecin/boks-s',
+    ctaLink: 'https://wynajmij.lockit.pl/rent?step=1&typeId=32769a88-77d9-ef11-88f8-000d3a1d3d62',
+    featured: false,
+  },
+  {
+    id: 'm',
+    label: 'M',
+    image: '/boxes/boks-m-256.webp',
+    width: 256,
+    height: 200,
+    price: 'od 175',
+    priceEn: 'from 175',
+    priceRegular: '350',
+    detailLink: '/boksy/szczecin/boks-m',
+    ctaLink: 'https://wynajmij.lockit.pl/rent?step=1&typeId=531f0bd3-77d9-ef11-88f8-000d3a1d3d62',
+    featured: true,
+  },
+  {
+    id: 'l',
+    label: 'L',
+    image: '/boxes/boks-l-256.webp',
+    width: 256,
+    height: 181,
+    price: 'od 250',
+    priceEn: 'from 250',
+    priceRegular: '500',
+    detailLink: '/boksy/szczecin/boks-l',
+    ctaLink: 'https://wynajmij.lockit.pl/rent?step=1&typeId=93bd21f7-77d9-ef11-88f8-000d3a1d3d62',
+    featured: false,
+  },
 ];
 
-export default function BoxesSection({ dict }: BoxesSectionProps) {
+export function BoxesSection({ dict, locale }: BoxesSectionProps) {
   const t = dict;
+  const isEn = locale === 'en';
 
   return (
-    <section className="section-padding">
+    <section className="section-padding bg-brand-deep" id="oferta">
       <div className="container-wide mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground">{t.offer.heading}</h2>
-          <p className="mt-4 text-lg text-muted-foreground">{t.offer.sub}</p>
-        </div>
+        <h2 className="text-center text-3xl font-extrabold text-primary-foreground mb-4">
+          {t.offer.heading}
+        </h2>
+        <p className="text-center text-brand-light/80 max-w-xl mx-auto mb-12">
+          {t.offer.sub}
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {t.offer.boxes.map((box, index) => {
-            const data = boxData[index];
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {boxesMeta.map((box, index) => {
+            const tBox = t.offer.boxes[index];
+            if (!tBox) return null;
+
             return (
               <div
-                key={index}
-                className={`relative bg-card rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow border ${
-                  data.featured ? 'border-brand ring-2 ring-brand/20' : 'border-border'
+                key={box.id}
+                className={`relative rounded-2xl overflow-hidden border-2 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col animate-fade-in-up ${
+                  box.featured
+                    ? 'border-accent bg-brand/50 scale-[1.03]'
+                    : 'border-brand/40 bg-brand/30'
                 }`}
+                style={{ animationDelay: `${index * 150}ms` }}
               >
-                {data.featured && (
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 gradient-brand text-foreground border-0">
+                {box.featured && (
+                  <div className="bg-accent text-accent-foreground text-center py-1.5 text-xs font-bold tracking-wide uppercase">
                     {t.offer.featured}
-                  </Badge>
+                  </div>
                 )}
 
-                <div className="text-center mb-6">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-brand text-foreground text-2xl font-bold mb-4">
-                    {data.size}
-                  </div>
-                  <h3 className="text-xl font-bold text-card-foreground">{box.name}</h3>
-                  <p className="text-muted-foreground mt-2">{box.desc}</p>
-                </div>
+                <div className="p-6 text-center flex flex-col flex-1">
+                  <Image
+                    src={box.image}
+                    alt={tBox.name}
+                    width={box.width}
+                    height={box.height}
+                    className="w-32 h-auto mx-auto mb-3"
+                    loading="lazy"
+                  />
 
-                <div className="border-t border-border pt-6">
-                  <div className="flex items-baseline justify-center gap-1 mb-4">
-                    <span className="text-4xl font-bold text-foreground">{data.price}</span>
-                    <span className="text-muted-foreground">{t.common.monthAbbr}</span>
+                  <div className="text-3xl font-extrabold text-primary-foreground mb-2">
+                    {box.label}
                   </div>
-                  <p className="text-sm text-center text-brand font-medium mb-4">{t.common.discount}</p>
-                  <div className="flex justify-between text-sm text-muted-foreground mb-6">
-                    <span>Powierzchnia: {data.area}</span>
-                    <span>Pojemność: {data.volume}</span>
+
+                  <h3 className="text-lg font-bold text-primary-foreground mb-1">
+                    {tBox.name}
+                  </h3>
+
+                  <p className="text-sm text-brand-light/80 mb-4 flex-1">
+                    {tBox.desc}
+                  </p>
+
+                  <div className="mb-4">
+                    <span className="text-3xl font-extrabold text-primary-foreground">
+                      {isEn ? box.priceEn : box.price}
+                    </span>
+                    <span className="text-brand-light/60 text-sm"> {t.common.monthAbbr}</span>
+                    <div className="text-xs text-brand-light/50 line-through">
+                      {box.priceRegular} {t.common.monthAbbr}
+                    </div>
+                    <div className="text-xs text-accent font-semibold mt-1">
+                      {t.common.discount}
+                    </div>
                   </div>
-                  <a
-                    href="https://wynajmij.lockit.pl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`block text-center py-3 px-6 rounded-xl font-bold transition-colors ${
-                      data.featured
-                        ? 'gradient-brand text-foreground hover:opacity-90'
-                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
-                    }`}
-                  >
-                    {t.common.rentNow}
-                  </a>
+
+                  <div className="space-y-2 mt-auto">
+                    <a
+                      href={box.ctaLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block gradient-brand text-foreground py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"
+                    >
+                      {t.common.rentNow}
+                    </a>
+                    <Link
+                      href={`/${locale}${box.detailLink}`}
+                      className="block text-brand-light/70 hover:text-primary-foreground py-2 text-sm transition-colors"
+                    >
+                      {t.common.learnMore}
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
@@ -77,3 +148,5 @@ export default function BoxesSection({ dict }: BoxesSectionProps) {
     </section>
   );
 }
+
+export default BoxesSection;
