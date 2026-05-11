@@ -260,7 +260,7 @@ export default async function SelfStorageSzczecinPage({ params }: Props) {
               <div className="text-center mt-8">
                 <Button asChild size="lg">
                   <Link href={`${basePath}/boksy/szczecin/`}>
-                    {isPl ? "Szczegóły i rezerwacja" : "Details & Booking"}
+                    {isPl ? "Szczegóły i wynajem" : "Details & Rental"}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>

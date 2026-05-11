@@ -5,7 +5,6 @@ const baseUrl = 'https://lockit.pl';
 // All pages from the sitemap (Phase 1)
 const pages = [
   { url: '/', priority: 1.0, changeFrequency: 'weekly' as const },
-  { url: '/rezerwacja', priority: 0.9, changeFrequency: 'weekly' as const },
   { url: '/boksy', priority: 0.9, changeFrequency: 'weekly' as const },
   { url: '/boksy/szczecin', priority: 0.8, changeFrequency: 'weekly' as const },
   { url: '/boksy/szczecin/boks-s', priority: 0.7, changeFrequency: 'monthly' as const },

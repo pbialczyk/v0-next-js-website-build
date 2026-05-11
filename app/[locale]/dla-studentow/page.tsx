@@ -192,8 +192,8 @@ export default async function StudentPage({
               </h3>
               <p className="text-muted-foreground">
                 {isEn
-                  ? "Book your unit before the end of the semester when demand is highest. Our smallest 3 m² unit fits contents of a typical student room!"
-                  : "Zarezerwuj boks przed końcem semestru, gdy popyt jest największy. Nasz najmniejszy boks 3 m² zmieści zawartość typowego pokoju studenckiego!"}
+                  ? "Rent your unit before the end of the semester when demand is highest. Our smallest 3 m² unit fits contents of a typical student room!"
+                  : "Wynajmij boks przed końcem semestru, gdy popyt jest największy. Nasz najmniejszy boks 3 m² zmieści zawartość typowego pokoju studenckiego!"}
               </p>
             </div>
           </div>
