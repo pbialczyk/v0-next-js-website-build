@@ -37,20 +37,20 @@ export function HeroSection({ dict }: HeroSectionProps) {
 
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-black">
-      {/* Mobile: Responsive picture with AVIF/WebP */}
+      {/* Mobile: Responsive picture with AVIF/WebP (640/1024) */}
       <picture className="md:hidden">
         <source
           type="image/avif"
           srcSet="/hero/hero-storage-640.avif 640w, /hero/hero-storage-1024.avif 1024w"
-          sizes="(max-width: 640px) 100vw, 640px"
+          sizes="100vw"
         />
         <source
           type="image/webp"
           srcSet="/hero/hero-storage-640.webp 640w, /hero/hero-storage-1024.webp 1024w"
-          sizes="(max-width: 640px) 100vw, 640px"
+          sizes="100vw"
         />
         <img
-          src="/hero/hero-storage-640.avif"
+          src="/hero/hero-storage-640.webp"
           alt=""
           fetchPriority="high"
           decoding="async"
@@ -75,23 +75,25 @@ export function HeroSection({ dict }: HeroSectionProps) {
         </video>
       )}
 
-      {/* Desktop fallback image while video loads */}
+      {/* Desktop fallback image while video loads (1024/1536/1920) */}
       <picture className="hidden md:block">
         <source
           type="image/avif"
-          srcSet="/hero/hero-storage-1024.avif"
+          srcSet="/hero/hero-storage-1024.avif 1024w, /hero/hero-storage-1536.avif 1536w, /hero/hero-storage-1920.avif 1920w"
+          sizes="100vw"
         />
         <source
           type="image/webp"
-          srcSet="/hero/hero-storage-1024.webp"
+          srcSet="/hero/hero-storage-1024.webp 1024w, /hero/hero-storage-1536.webp 1536w, /hero/hero-storage-1920.webp 1920w"
+          sizes="100vw"
         />
         <img
-          src="/hero/hero-storage-1024.avif"
+          src="/hero/hero-storage-1024.webp"
           alt=""
           fetchPriority="high"
           decoding="async"
-          width={1024}
-          height={683}
+          width={1920}
+          height={1280}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${showVideo ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
         />
@@ -129,15 +131,15 @@ export function HeroSection({ dict }: HeroSectionProps) {
           </a>
         </div>
 
-        {/* Stats - value add from v0 */}
+        {/* Stats */}
         <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto">
           <div className="text-center">
             <div className="text-3xl sm:text-4xl font-bold text-brand">24/7</div>
-            <div className="text-sm text-hero-muted mt-1">Dostęp</div>
+            <div className="text-sm text-hero-muted mt-1">{t.hero.access || 'Dostęp'}</div>
           </div>
           <div className="text-center">
             <div className="text-3xl sm:text-4xl font-bold text-brand">3-12</div>
-            <div className="text-sm text-hero-muted mt-1">m² boksów</div>
+            <div className="text-sm text-hero-muted mt-1">{t.hero.boxSize || 'm² boksów'}</div>
           </div>
           <div className="text-center">
             <div className="text-3xl sm:text-4xl font-bold text-brand">5.0</div>

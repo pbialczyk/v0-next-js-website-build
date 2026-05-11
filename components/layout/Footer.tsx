@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
-import Logo from '@/components/Logo';
+import { Logo } from '@/components/Logo';
 import type { Dictionary } from '@/lib/i18n/getDictionary';
 import type { Locale } from '@/lib/i18n/config';
 
@@ -20,7 +20,9 @@ export function Footer({ dict, locale }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <Logo className="mb-4 text-white" />
+            <div className="mb-4">
+              <Logo variant="light" />
+            </div>
             <p className="text-sm leading-relaxed opacity-80">{t.footer.tagline}</p>
             <div className="flex gap-4 mt-4">
               <a

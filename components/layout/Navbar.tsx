@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, ChevronDown, Globe } from 'lucide-react';
-import Logo from '@/components/Logo';
+import { Logo } from '@/components/Logo';
 import type { Dictionary } from '@/lib/i18n/getDictionary';
 import type { Locale } from '@/lib/i18n/config';
 
@@ -57,9 +57,7 @@ export function Navbar({ dict, locale }: NavbarProps) {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-brand-deep/95 backdrop-blur-md border-b border-brand/30">
       <div className="container-wide mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <Link href={localePath('/')} className="flex items-center gap-2 shrink-0">
-            <Logo className="text-white" />
-          </Link>
+          <Logo href={localePath('/')} variant="light" />
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1">

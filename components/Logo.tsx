@@ -1,50 +1,39 @@
+'use client';
+
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface LogoProps {
   className?: string;
   href?: string;
+  variant?: 'color' | 'light';
 }
 
-export default function Logo({ className = '', href }: LogoProps) {
-  const logoSvg = (
-    <svg
-      className={`h-8 w-auto ${className}`}
-      viewBox="0 0 120 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="LOCKIT self storage"
-    >
-      <rect x="0" y="0" width="32" height="32" rx="6" fill="url(#brand-gradient)" />
-      <path
-        d="M8 8h4v12h8v4H8V8z"
-        fill="white"
-      />
-      <text
-        x="40"
-        y="22"
-        fill="currentColor"
-        fontFamily="Plus Jakarta Sans, system-ui, sans-serif"
-        fontWeight="800"
-        fontSize="18"
-      >
-        LOCKIT
-      </text>
-      <defs>
-        <linearGradient id="brand-gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#88C22A" />
-          <stop offset="1" stopColor="#6BA31E" />
-        </linearGradient>
-      </defs>
-    </svg>
+export function Logo({ className = '', href, variant = 'color' }: LogoProps) {
+  const logoSrc = variant === 'light' 
+    ? '/logo/lockit-logo-light-360.webp'
+    : '/logo/lockit-logo-color-360.webp';
+
+  const logoImage = (
+    <Image
+      src={logoSrc}
+      alt="LOCKIT Self Storage"
+      width={180}
+      height={48}
+      className={`h-8 sm:h-10 w-auto ${className}`}
+      priority
+    />
   );
 
   if (href) {
     return (
-      <Link href={href} className="flex items-center">
-        {logoSvg}
+      <Link href={href} className="flex items-center shrink-0">
+        {logoImage}
       </Link>
     );
   }
 
-  return logoSvg;
+  return logoImage;
 }
+
+export default Logo;
