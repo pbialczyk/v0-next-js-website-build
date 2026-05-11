@@ -23,9 +23,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Default locale (pl) doesn't need prefix - just continue
-  // EN requires /en/ prefix
-  return NextResponse.next();
+  // Rewrite to default locale (pl) for paths without locale prefix
+  // This keeps the URL clean (no /pl prefix) but routes to /pl/... internally
+  const newUrl = new URL(`/${defaultLocale}${pathname}`, request.url);
+  return NextResponse.rewrite(newUrl);
 }
 
 export const config = {
