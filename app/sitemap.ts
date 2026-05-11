@@ -5,6 +5,7 @@ const baseUrl = 'https://lockit.pl';
 // All pages from the sitemap (Phase 1)
 const pages = [
   { url: '/', priority: 1.0, changeFrequency: 'weekly' as const },
+  { url: '/rezerwacja', priority: 0.9, changeFrequency: 'weekly' as const },
   { url: '/boksy', priority: 0.9, changeFrequency: 'weekly' as const },
   { url: '/boksy/szczecin', priority: 0.8, changeFrequency: 'weekly' as const },
   { url: '/boksy/szczecin/boks-s', priority: 0.7, changeFrequency: 'monthly' as const },
@@ -23,6 +24,10 @@ const pages = [
   { url: '/ubezpieczenie', priority: 0.6, changeFrequency: 'monthly' as const },
   { url: '/pakowanie-organizacja', priority: 0.6, changeFrequency: 'monthly' as const },
   { url: '/poradnik', priority: 0.7, changeFrequency: 'weekly' as const },
+  { url: '/poradnik/jak-wybrac-rozmiar-boksu', priority: 0.6, changeFrequency: 'monthly' as const },
+  { url: '/poradnik/self-storage-dla-firm', priority: 0.6, changeFrequency: 'monthly' as const },
+  { url: '/poradnik/przechowywanie-remont', priority: 0.6, changeFrequency: 'monthly' as const },
+  { url: '/poradnik/archiwizacja-dokumentow', priority: 0.6, changeFrequency: 'monthly' as const },
   { url: '/o-nas', priority: 0.6, changeFrequency: 'monthly' as const },
   { url: '/faq', priority: 0.7, changeFrequency: 'monthly' as const },
   { url: '/kontakt', priority: 0.7, changeFrequency: 'monthly' as const },
