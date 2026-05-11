@@ -1,5 +1,8 @@
+'use client';
+
 import { Star } from 'lucide-react';
 import type { Dictionary } from '@/lib/i18n/getDictionary';
+import { AnimatedCard } from '@/components/ui/AnimatedCard';
 
 interface ReviewsSectionProps {
   dict: Dictionary;
@@ -22,26 +25,25 @@ export default function ReviewsSection({ dict }: ReviewsSectionProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {t.reviews.items.slice(0, 3).map((review, index) => (
-            <div
-              key={index}
-              className="bg-card rounded-2xl p-6 shadow-sm border border-border"
-            >
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-brand text-brand" />
-                ))}
-              </div>
-              <p className="text-card-foreground leading-relaxed mb-6">&quot;{review.text}&quot;</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full gradient-brand flex items-center justify-center text-foreground font-bold text-sm">
-                  {review.initials}
+            <AnimatedCard key={index} delay={index * 100}>
+              <div className="bg-card rounded-2xl p-6 shadow-sm border border-border h-full">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-brand text-brand" />
+                  ))}
                 </div>
-                <div>
-                  <div className="font-semibold text-card-foreground">{review.name}</div>
-                  <div className="text-sm text-muted-foreground">{t.reviews.googleReview}</div>
+                <p className="text-card-foreground leading-relaxed mb-6">&quot;{review.text}&quot;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full gradient-brand flex items-center justify-center text-foreground font-bold text-sm">
+                    {review.initials}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-card-foreground">{review.name}</div>
+                    <div className="text-sm text-muted-foreground">{t.reviews.googleReview}</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </AnimatedCard>
           ))}
         </div>
 

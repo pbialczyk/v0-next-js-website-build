@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
 import type { Dictionary } from '@/lib/i18n/getDictionary';
 import type { Locale } from '@/lib/i18n/config';
+import { AnimatedCard } from '@/components/ui/AnimatedCard';
 
 interface BoxesSectionProps {
   dict: Dictionary;
@@ -73,76 +73,76 @@ export function BoxesSection({ dict, locale }: BoxesSectionProps) {
             if (!tBox) return null;
 
             return (
-              <div
-                key={box.id}
-                className={`relative rounded-2xl overflow-hidden border-2 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col animate-fade-in-up ${
-                  box.featured
-                    ? 'border-accent bg-brand/50 scale-[1.03]'
-                    : 'border-brand/40 bg-brand/30'
-                }`}
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                {box.featured && (
-                  <div className="bg-accent text-accent-foreground text-center py-1.5 text-xs font-bold tracking-wide uppercase">
-                    {t.offer.featured}
-                  </div>
-                )}
-
-                <div className="p-6 text-center flex flex-col flex-1">
-                  <div className="relative mx-auto mb-3 w-36 h-32 flex items-center justify-center rounded-xl overflow-hidden" style={{ backgroundColor: '#f5f5f5' }}>
-                    <Image
-                      src={box.image}
-                      alt={tBox.name}
-                      width={box.width}
-                      height={box.height}
-                      className="w-full h-auto object-contain mix-blend-multiply"
-                      loading="lazy"
-                    />
-                  </div>
-
-                  <div className="text-3xl font-extrabold text-primary-foreground mb-2">
-                    {box.label}
-                  </div>
-
-                  <h3 className="text-lg font-bold text-primary-foreground mb-1">
-                    {tBox.name}
-                  </h3>
-
-                  <p className="text-sm text-brand-light/80 mb-4 flex-1">
-                    {tBox.desc}
-                  </p>
-
-                  <div className="mb-4">
-                    <span className="text-3xl font-extrabold text-primary-foreground">
-                      {isEn ? box.priceEn : box.price}
-                    </span>
-                    <span className="text-brand-light/60 text-sm"> {t.common.monthAbbr}</span>
-                    <div className="text-xs text-brand-light/50 line-through">
-                      {box.priceRegular} {t.common.monthAbbr}
+              <AnimatedCard key={box.id} delay={index * 150} className="h-full">
+                <div
+                  className={`relative rounded-2xl overflow-hidden border-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col ${
+                    box.featured
+                      ? 'border-accent bg-brand/50 scale-[1.03]'
+                      : 'border-brand/40 bg-brand/30'
+                  }`}
+                >
+                  {box.featured && (
+                    <div className="bg-accent text-accent-foreground text-center py-1.5 text-xs font-bold tracking-wide uppercase">
+                      {t.offer.featured}
                     </div>
-                    <div className="text-xs text-accent font-semibold mt-1">
-                      {t.common.discount}
-                    </div>
-                  </div>
+                  )}
 
-                  <div className="space-y-2 mt-auto">
-                    <a
-                      href={box.ctaLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block gradient-brand text-foreground py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"
-                    >
-                      {t.common.rentNow}
-                    </a>
-                    <Link
-                      href={`/${locale}${box.detailLink}`}
-                      className="block text-brand-light/70 hover:text-primary-foreground py-2 text-sm transition-colors"
-                    >
-                      {t.common.learnMore}
-                    </Link>
+                  <div className="p-6 text-center flex flex-col flex-1">
+                    <div className="relative mx-auto mb-3 w-36 h-32 flex items-center justify-center rounded-xl overflow-hidden" style={{ backgroundColor: '#f5f5f5' }}>
+                      <Image
+                        src={box.image}
+                        alt={tBox.name}
+                        width={box.width}
+                        height={box.height}
+                        className="w-full h-auto object-contain mix-blend-multiply"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <div className="text-3xl font-extrabold text-primary-foreground mb-2">
+                      {box.label}
+                    </div>
+
+                    <h3 className="text-lg font-bold text-primary-foreground mb-1">
+                      {tBox.name}
+                    </h3>
+
+                    <p className="text-sm text-brand-light/80 mb-4 flex-1">
+                      {tBox.desc}
+                    </p>
+
+                    <div className="mb-4">
+                      <span className="text-3xl font-extrabold text-primary-foreground">
+                        {isEn ? box.priceEn : box.price}
+                      </span>
+                      <span className="text-brand-light/60 text-sm"> {t.common.monthAbbr}</span>
+                      <div className="text-xs text-brand-light/50 line-through">
+                        {box.priceRegular} {t.common.monthAbbr}
+                      </div>
+                      <div className="text-xs text-accent font-semibold mt-1">
+                        {t.common.discount}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mt-auto">
+                      <a
+                        href={box.ctaLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block gradient-brand text-foreground py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"
+                      >
+                        {t.common.rentNow}
+                      </a>
+                      <Link
+                        href={`/${locale}${box.detailLink}`}
+                        className="block text-brand-light/70 hover:text-primary-foreground py-2 text-sm transition-colors"
+                      >
+                        {t.common.learnMore}
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedCard>
             );
           })}
         </div>

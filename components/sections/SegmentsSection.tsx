@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import { User, Building2, Wrench, Archive, GraduationCap, ArrowRight } from 'lucide-react';
 import type { Dictionary } from '@/lib/i18n/getDictionary';
 import type { Locale } from '@/lib/i18n/config';
+import { AnimatedCard } from '@/components/ui/AnimatedCard';
 
 interface SegmentsSectionProps {
   dict: Dictionary;
@@ -42,21 +45,22 @@ export default function SegmentsSection({ dict, locale }: SegmentsSectionProps) 
           {t.segments.items.map((item, index) => {
             const Icon = icons[index];
             return (
-              <Link
-                key={index}
-                href={`${prefix}${segmentLinks[index]}`}
-                className="group bg-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-border hover:border-brand/30"
-              >
-                <div className={`w-12 h-12 rounded-xl ${colors[index]} flex items-center justify-center mb-4`}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <h3 className="font-bold text-card-foreground group-hover:text-brand transition-colors">{item.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
-                <div className="mt-4 flex items-center text-sm font-medium text-brand opacity-0 group-hover:opacity-100 transition-opacity">
-                  {t.common.learnMore}
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </div>
-              </Link>
+              <AnimatedCard key={index} delay={index * 100}>
+                <Link
+                  href={`${prefix}${segmentLinks[index]}`}
+                  className="group bg-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-border hover:border-brand/30 block h-full"
+                >
+                  <div className={`w-12 h-12 rounded-xl ${colors[index]} flex items-center justify-center mb-4`}>
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-bold text-card-foreground group-hover:text-brand transition-colors">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
+                  <div className="mt-4 flex items-center text-sm font-medium text-brand opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t.common.learnMore}
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </div>
+                </Link>
+              </AnimatedCard>
             );
           })}
         </div>
