@@ -1,9 +1,9 @@
 import { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { getDictionary } from "@/lib/i18n/getDictionary"
 import { locales, defaultLocale } from "@/lib/i18n/config"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Check, MapPin, Clock, Shield, ArrowRight, Package, Truck, Users } from "lucide-react"
 import { JsonLd } from "@/components/seo/JsonLd"
@@ -59,36 +59,48 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const boxes = [
   {
     id: "s",
-    size: "3 m²",
-    volume: "6 m³",
-    height: "2 m",
-    pallets: 6,
+    letter: "S",
+    size: "3m2",
+    dimensions: "150x200x200cm",
     priceFrom: 125,
     priceRegular: 250,
-    color: "bg-sky-500",
-    popular: false,
+    priceVat: "153,75",
+    typeId: "32769a88-77d9-ef11-88f8-000d3a1d3d62",
+    name: { pl: "Mały box", en: "Small box" },
+    description: {
+      pl: "Sprawdzi się jako komórka lokatorska do przechowywania kartonów, drobnych mebli czy narzędzi ogrodowych. Towar z 6 EUR/palet",
+      en: "Perfect as a tenant's storage for boxes, small furniture or garden tools. Fits 6 EUR/pallets"
+    },
   },
   {
     id: "m",
-    size: "6 m²",
-    volume: "12 m³",
-    height: "2 m",
-    pallets: 12,
+    letter: "M",
+    size: "6m2",
+    dimensions: "200x300x200cm",
     priceFrom: 175,
     priceRegular: 350,
-    color: "bg-primary",
-    popular: true,
+    priceVat: "215,25",
+    typeId: "531f0bd3-77d9-ef11-88f8-000d3a1d3d62",
+    name: { pl: "Średni box", en: "Medium box" },
+    description: {
+      pl: "Doskonałe rozwiązanie do przechowywania rowerów, motoru, nart lub mebli z mieszkania do 50 m2. Towar z 12 EUR/palet.",
+      en: "Perfect solution for storing bicycles, motorcycle, skis or furniture from an apartment up to 50 m2. Fits 12 EUR/pallets."
+    },
   },
   {
     id: "l",
-    size: "12 m²",
-    volume: "24 m³",
-    height: "2 m",
-    pallets: 24,
+    letter: "L",
+    size: "12m2",
+    dimensions: "200x600x200cm",
     priceFrom: 250,
     priceRegular: 500,
-    color: "bg-slate-700",
-    popular: false,
+    priceVat: "307,50",
+    typeId: "93bd21f7-77d9-ef11-88f8-000d3a1d3d62",
+    name: { pl: "Duży box", en: "Large box" },
+    description: {
+      pl: "To duża przestrzeń często wybierana przez firmy. Idealna dla mebli, sprzętu sportowego, maszyn, narzędzi i materiałów budowlanych. To aż 24 m3!",
+      en: "A large space often chosen by businesses. Ideal for furniture, sports equipment, machines, tools and construction materials. That's 24 m3!"
+    },
   },
 ]
 
@@ -107,7 +119,7 @@ export default async function BoksySzczecinPage({ params }: Props) {
       ? "Samoobsługowe boksy magazynowe w Szczecinie. Bezpieczne, nowoczesne, dostępne 24/7."
       : "Self-service storage units in Szczecin. Safe, modern, available 24/7.",
     url: "https://lockit.pl",
-    telephone: "+48 123 456 789",
+    telephone: "+48 666 030 717",
     address: {
       "@type": "PostalAddress",
       streetAddress: "ul. Gdańska 14C",
@@ -117,8 +129,8 @@ export default async function BoksySzczecinPage({ params }: Props) {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 53.4285,
-      longitude: 14.5528,
+      latitude: 53.4366128,
+      longitude: 14.5541361,
     },
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
@@ -136,22 +148,15 @@ export default async function BoksySzczecinPage({ params }: Props) {
       "@type": "ListItem",
       position: index + 1,
       item: {
-        "@type": "Service",
-        name: `Boks ${box.id.toUpperCase()} — ${box.size}`,
-        description: isPl
-          ? `Boks magazynowy ${box.size} w Szczecinie. Pojemność ${box.volume}.`
-          : `Storage unit ${box.size} in Szczecin. Capacity ${box.volume}.`,
+        "@type": "Product",
+        name: `${isPl ? box.name.pl : box.name.en} ${box.size}`,
+        description: isPl ? box.description.pl : box.description.en,
         url: `https://lockit.pl${basePath}/boksy/szczecin/boks-${box.id}/`,
         offers: {
           "@type": "Offer",
           price: box.priceFrom,
           priceCurrency: "PLN",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            price: box.priceFrom,
-            priceCurrency: "PLN",
-            unitText: isPl ? "miesiąc" : "month",
-          },
+          availability: "https://schema.org/InStock",
         },
       },
     })),
@@ -203,88 +208,88 @@ export default async function BoksySzczecinPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Boxes Grid */}
+        {/* Boxes Grid - Screenshot Style */}
         <section className="py-16 md:py-20">
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {boxes.map((box) => (
-                <Card
-                  key={box.id}
-                  className={`relative overflow-hidden transition-all hover:shadow-lg ${box.popular ? "ring-2 ring-primary" : ""}`}
-                >
-                  {box.popular && (
-                    <div className="absolute top-4 right-4">
-                      <Badge className="bg-primary text-primary-foreground">
-                        {isPl ? "Najpopularniejszy" : "Most Popular"}
-                      </Badge>
-                    </div>
-                  )}
+                <div key={box.id} className="flex flex-col items-center text-center">
+                  {/* Black Circle Badge */}
+                  <div className="w-20 h-20 rounded-full bg-black flex items-center justify-center mb-6">
+                    <span className="text-white text-3xl font-bold">{box.letter}</span>
+                  </div>
 
-                  <CardHeader className={`${box.color} text-white pb-8`}>
-                    <CardTitle className="text-2xl font-bold">Boks {box.id.toUpperCase()}</CardTitle>
-                    <CardDescription className="text-white/90 text-lg">{box.size}</CardDescription>
-                  </CardHeader>
+                  {/* Title */}
+                  <h2 className="text-xl font-bold mb-4">
+                    {isPl ? box.name.pl : box.name.en} {box.size}
+                  </h2>
 
-                  <CardContent className="pt-6">
-                    <div className="mb-6">
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-sm text-muted-foreground line-through">{box.priceRegular} zł</span>
-                      </div>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-4xl font-bold text-foreground">{box.priceFrom}</span>
-                        <span className="text-muted-foreground">{isPl ? "zł/mies." : "PLN/mo"}</span>
-                      </div>
-                      <Badge variant="outline" className="mt-2 text-primary border-primary">
-                        {isPl ? "-50% przez pierwszy miesiąc" : "-50% first month"}
-                      </Badge>
-                    </div>
+                  {/* Box Image */}
+                  <div className="relative w-full h-48 mb-4">
+                    <Image
+                      src={`/boxes/boks-${box.id}.webp`}
+                      alt={`${isPl ? box.name.pl : box.name.en} ${box.size}`}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
 
-                    <ul className="space-y-3 mb-6 text-sm">
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span>
-                          {isPl ? "Powierzchnia:" : "Area:"} <strong>{box.size}</strong>
-                        </span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span>
-                          {isPl ? "Pojemność:" : "Capacity:"} <strong>{box.volume}</strong>
-                        </span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span>
-                          {isPl ? "Wysokość:" : "Height:"} <strong>{box.height}</strong>
-                        </span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span>
-                          {isPl ? "Mieści:" : "Fits:"}{" "}
-                          <strong>
-                            {box.pallets} {isPl ? "europalet" : "europallets"}
-                          </strong>
-                        </span>
-                      </li>
-                    </ul>
+                  {/* Dimensions */}
+                  <p className="font-semibold mb-3">{box.dimensions}</p>
 
-                    <div className="space-y-3">
-                      <Button asChild className="w-full" size="lg">
-                        <a href="https://sprytki.pl/lockit" target="_blank" rel="noopener noreferrer">
-                          {isPl ? "Wynajmij teraz" : "Rent Now"}
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </a>
-                      </Button>
-                      <Button asChild variant="outline" className="w-full">
-                        <Link href={`${basePath}/boksy/szczecin/boks-${box.id}/`}>
-                          {isPl ? "Szczegóły boksu" : "Unit Details"}
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground mb-6 px-2">
+                    {isPl ? box.description.pl : box.description.en}
+                  </p>
+
+                  {/* Pricing */}
+                  <div className="mb-2">
+                    <span className="text-muted-foreground line-through mr-2">{box.priceRegular}</span>
+                    <span className="text-2xl font-bold">{box.priceFrom} zł</span>
+                    <span className="text-muted-foreground">/{isPl ? "miesiąc" : "month"}</span>
+                  </div>
+
+                  {/* Discount Badge */}
+                  <p className="text-red-500 font-semibold mb-2">
+                    {isPl ? "-50% przez 1 miesiąc" : "-50% for 1 month"}
+                  </p>
+
+                  {/* VAT Price */}
+                  <p className="text-sm text-muted-foreground mb-2">
+                    {box.priceVat} zł {isPl ? "z VAT" : "with VAT"}
+                  </p>
+
+                  {/* Legal Note */}
+                  <p className="text-xs text-muted-foreground mb-2">
+                    {isPl ? "najniższa cena z przed 30 dni przed obniżką:" : "lowest price from 30 days before discount:"}
+                  </p>
+                  <p className="text-xs text-muted-foreground mb-6">
+                    {box.priceFrom}zł/{isPl ? "miesiąc" : "month"}, {isPl ? "cena regularna" : "regular price"} {box.priceRegular} zł/{isPl ? "miesiąc" : "month"}
+                  </p>
+
+                  {/* CTA Button */}
+                  <Button 
+                    asChild 
+                    className="w-full max-w-xs"
+                    style={{ backgroundColor: '#c8e94d', color: '#000' }}
+                  >
+                    <a 
+                      href={`https://wynajmij.lockit.pl/rent?step=1&typeId=${box.typeId}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      {isPl ? "Wynajmij teraz" : "Rent now"}
+                    </a>
+                  </Button>
+
+                  {/* Details Link */}
+                  <Link 
+                    href={`${basePath}/boksy/szczecin/boks-${box.id}/`}
+                    className="mt-3 text-sm text-primary hover:underline"
+                  >
+                    {isPl ? "Dowiedz się więcej" : "Learn more"} →
+                  </Link>
+                </div>
               ))}
             </div>
           </div>
@@ -353,8 +358,8 @@ export default async function BoksySzczecinPage({ params }: Props) {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg">
-                  <a href="tel:+48123456789">
-                    {isPl ? "Zadzwoń: +48 123 456 789" : "Call: +48 123 456 789"}
+                  <a href="tel:+48666030717">
+                    {isPl ? "Zadzwoń: +48 666 030 717" : "Call: +48 666 030 717"}
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
