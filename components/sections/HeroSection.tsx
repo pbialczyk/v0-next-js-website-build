@@ -138,8 +138,8 @@ export function HeroSection({ dict }: HeroSectionProps) {
             <div className="text-sm text-hero-muted mt-1">{t.hero.access || 'Dostęp'}</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-brand">3-12</div>
-            <div className="text-sm text-hero-muted mt-1">{t.hero.boxSize || 'm² boksów'}</div>
+            <div className="text-3xl sm:text-4xl font-bold text-brand">3–12 m²</div>
+            <div className="text-sm text-hero-muted mt-1">{t.hero.boxSize || 'powierzchnia'}</div>
           </div>
           <div className="text-center">
             <div className="text-3xl sm:text-4xl font-bold text-brand">5.0</div>
