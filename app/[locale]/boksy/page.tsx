@@ -128,7 +128,7 @@ export default async function BoksyPage({ params }: Props) {
               {boxesMeta.map((box, index) => (
                 <div 
                   key={box.id} 
-                  className="flex flex-col items-center text-center animate-fade-in-up"
+                  className="flex flex-col items-center text-center animate-fade-in-up h-full"
                   style={{ animationDelay: `${index * 150}ms` }}
                 >
                   {/* Black circular badge */}
@@ -156,47 +156,49 @@ export default async function BoksyPage({ params }: Props) {
                   {/* Dimensions */}
                   <p className="font-bold text-foreground mb-3">{box.dimensions}</p>
 
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed max-w-xs">
+                  {/* Description - fixed height for alignment */}
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed max-w-xs min-h-[80px]">
                     {isPl ? box.description.pl : box.description.en}
                   </p>
 
-                  {/* Pricing */}
-                  <div className="mb-4">
-                    <div className="flex items-baseline justify-center gap-2 mb-1">
-                      <span className="text-lg text-muted-foreground line-through">
-                        {box.priceRegular}
-                      </span>
-                      <span className="text-2xl font-bold text-foreground">
-                        {box.pricePromo} {isPl ? 'zł/miesiąc' : 'PLN/month'}
-                      </span>
+                  {/* Pricing section - pushed to bottom */}
+                  <div className="mt-auto w-full">
+                    {/* Pricing */}
+                    <div className="mb-4">
+                      <div className="flex items-baseline justify-center gap-2 mb-1">
+                        <span className="text-lg text-muted-foreground line-through">
+                          {box.priceRegular}
+                        </span>
+                        <span className="text-2xl font-bold text-foreground">
+                          {box.pricePromo} {isPl ? 'zł/miesiąc' : 'PLN/month'}
+                        </span>
+                      </div>
+                      <p className="text-sm font-semibold text-red-500 mb-2">
+                        {isPl ? '-50% przez 1 miesiąc' : '-50% for 1 month'}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {box.priceVat} {isPl ? 'zł z VAT' : 'PLN incl. VAT'}
+                      </p>
                     </div>
-                    <p className="text-sm font-semibold text-red-500 mb-2">
-                      {isPl ? '-50% przez 1 miesiąc' : '-50% for 1 month'}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {box.priceVat} {isPl ? 'zł z VAT' : 'PLN incl. VAT'}
-                    </p>
-                  </div>
 
-                  {/* Legal price info */}
-                  <div className="text-xs text-muted-foreground/70 mb-6 space-y-0.5">
-                    <p>{isPl ? 'najniższa cena z przed 30 dni przed obniżką:' : 'lowest price from 30 days before discount:'}</p>
-                    <p>
-                      {box.pricePromo}{isPl ? 'zł/miesiąc' : 'PLN/month'}, {isPl ? 'cena regularna' : 'regular price'} {box.priceRegular} {isPl ? 'zł/miesiąc' : 'PLN/month'}
-                    </p>
-                  </div>
+                    {/* Legal price info */}
+                    <div className="text-xs text-muted-foreground/70 mb-6 space-y-0.5">
+                      <p>{isPl ? 'najniższa cena z przed 30 dni przed obniżką:' : 'lowest price from 30 days before discount:'}</p>
+                      <p>
+                        {box.pricePromo}{isPl ? 'zł/miesiąc' : 'PLN/month'}, {isPl ? 'cena regularna' : 'regular price'} {box.priceRegular} {isPl ? 'zł/miesiąc' : 'PLN/month'}
+                      </p>
+                    </div>
 
-                  {/* CTA Button */}
-                  <div className="mt-auto w-full max-w-xs space-y-3">
-                    <a
-                      href={box.ctaLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full bg-[#c8e94d] hover:bg-[#b8d93d] text-foreground py-3 px-6 rounded-lg font-bold text-sm transition-colors text-center"
-                    >
-                      {isPl ? 'Wynajmij teraz' : 'Rent now'}
-                    </a>
+                    {/* CTA Button */}
+                    <div className="w-full max-w-xs mx-auto space-y-3">
+                      <a
+                        href={box.ctaLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full bg-[#c8e94d] hover:bg-[#b8d93d] text-foreground py-3 px-6 rounded-lg font-bold text-sm transition-colors text-center"
+                      >
+                        {isPl ? 'Wynajmij teraz' : 'Rent now'}
+                      </a>
                     <Link
                       href={`${basePath}${box.detailLink}/`}
                       className="block text-muted-foreground hover:text-foreground py-2 text-sm transition-colors"

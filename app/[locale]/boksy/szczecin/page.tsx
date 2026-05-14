@@ -213,7 +213,7 @@ export default async function BoksySzczecinPage({ params }: Props) {
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {boxes.map((box) => (
-                <div key={box.id} className="flex flex-col items-center text-center">
+                <div key={box.id} className="flex flex-col items-center text-center h-full">
                   {/* Black Circle Badge */}
                   <div className="w-20 h-20 rounded-full bg-black flex items-center justify-center mb-6">
                     <span className="text-white text-3xl font-bold">{box.letter}</span>
@@ -237,58 +237,61 @@ export default async function BoksySzczecinPage({ params }: Props) {
                   {/* Dimensions */}
                   <p className="font-semibold mb-3">{box.dimensions}</p>
 
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground mb-6 px-2">
+                  {/* Description - fixed height for alignment */}
+                  <p className="text-sm text-muted-foreground mb-6 px-2 min-h-[80px]">
                     {isPl ? box.description.pl : box.description.en}
                   </p>
 
-                  {/* Pricing */}
-                  <div className="mb-2">
-                    <span className="text-muted-foreground line-through mr-2">{box.priceRegular}</span>
-                    <span className="text-2xl font-bold">{box.priceFrom} zł</span>
-                    <span className="text-muted-foreground">/{isPl ? "miesiąc" : "month"}</span>
-                  </div>
+                  {/* Pricing section - pushed to bottom with mt-auto */}
+                  <div className="mt-auto w-full">
+                    {/* Pricing */}
+                    <div className="mb-2">
+                      <span className="text-muted-foreground line-through mr-2">{box.priceRegular}</span>
+                      <span className="text-2xl font-bold">{box.priceFrom} zł</span>
+                      <span className="text-muted-foreground">/{isPl ? "miesiąc" : "month"}</span>
+                    </div>
 
-                  {/* Discount Badge */}
-                  <p className="text-red-500 font-semibold mb-2">
-                    {isPl ? "-50% przez 1 miesiąc" : "-50% for 1 month"}
-                  </p>
+                    {/* Discount Badge */}
+                    <p className="text-red-500 font-semibold mb-2">
+                      {isPl ? "-50% przez 1 miesiąc" : "-50% for 1 month"}
+                    </p>
 
-                  {/* VAT Price */}
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {box.priceVat} zł {isPl ? "z VAT" : "with VAT"}
-                  </p>
+                    {/* VAT Price */}
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {box.priceVat} zł {isPl ? "z VAT" : "with VAT"}
+                    </p>
 
-                  {/* Legal Note */}
-                  <p className="text-xs text-muted-foreground mb-2">
-                    {isPl ? "najniższa cena z przed 30 dni przed obniżką:" : "lowest price from 30 days before discount:"}
-                  </p>
-                  <p className="text-xs text-muted-foreground mb-6">
-                    {box.priceFrom}zł/{isPl ? "miesiąc" : "month"}, {isPl ? "cena regularna" : "regular price"} {box.priceRegular} zł/{isPl ? "miesiąc" : "month"}
-                  </p>
+                    {/* Legal Note */}
+                    <p className="text-xs text-muted-foreground mb-2">
+                      {isPl ? "najniższa cena z przed 30 dni przed obniżką:" : "lowest price from 30 days before discount:"}
+                    </p>
+                    <p className="text-xs text-muted-foreground mb-6">
+                      {box.priceFrom}zł/{isPl ? "miesiąc" : "month"}, {isPl ? "cena regularna" : "regular price"} {box.priceRegular} zł/{isPl ? "miesiąc" : "month"}
+                    </p>
 
-                  {/* CTA Button */}
-                  <Button 
-                    asChild 
-                    className="w-full max-w-xs"
-                    style={{ backgroundColor: '#c8e94d', color: '#000' }}
-                  >
-                    <a 
-                      href={`https://wynajmij.lockit.pl/rent?step=1&typeId=${box.typeId}`} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
+                    {/* CTA Button */}
+                    <Button 
+                      asChild 
+                      className="w-full max-w-xs mx-auto"
+                      style={{ backgroundColor: '#c8e94d', color: '#000' }}
                     >
-                      {isPl ? "Wynajmij teraz" : "Rent now"}
-                    </a>
-                  </Button>
+                      <a 
+                        href={`https://wynajmij.lockit.pl/rent?step=1&typeId=${box.typeId}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        {isPl ? "Wynajmij teraz" : "Rent now"}
+                      </a>
+                    </Button>
 
-                  {/* Details Link */}
-                  <Link 
-                    href={`${basePath}/boksy/szczecin/boks-${box.id}/`}
-                    className="mt-3 text-sm text-primary hover:underline"
-                  >
-                    {isPl ? "Dowiedz się więcej" : "Learn more"} →
-                  </Link>
+                    {/* Details Link */}
+                    <Link 
+                      href={`${basePath}/boksy/szczecin/boks-${box.id}/`}
+                      className="mt-3 text-sm text-primary hover:underline inline-block"
+                    >
+                      {isPl ? "Dowiedz się więcej" : "Learn more"} →
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
